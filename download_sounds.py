@@ -261,35 +261,24 @@ def yt_dlp_download(urls, outdir: Path, prefix: str):
 # Prune by total size
 # =========================
 def prune_assets():
-    # Use the global ASSETS_DIR
-    global ASSETS_DIR
     total = sum(f.stat().st_size for f in ASSETS_DIR.rglob("*.wav"))
-    max_bytes = CONFIG["max_size_mb"] * 1024 * 1024
-    if total <= max_bytes:
-        return
-    log(f"Pruning to keep under {CONFIG['max_size_mb']} MB...")
-    files = sorted(ASSETS_DIR.rglob("*.wav"), key=lambda f: f.stat().st_mtime)
-    while total > max_bytes and files:
-        victim = files.pop(0)
-        try:
-            total -= victim.stat().st_size
-            victim.unlink()
-            log(f"Pruned {victim.name}")
-        except Exception as e:
-            log(f"Failed prune {victim}: {e}")
-
-    # 1) Prefer pruning ambience first (they’re larger)
-    for f in list(ambs):
-        if total <= limit: break
-        delete_file(f)
-
-    # 2) If still over limit, prune jumpscares but always leave MIN_JUMPS
-    while total > limit and len(jumps) > MIN_JUMPS:
-        f = jumps.pop(0)
-        delete_file(f)
+    limit = 500 * 1024 * 1024  # 500 MB
 
     if total > limit:
-        log(f"WARNING: Still over quota {total/1024/1024:.1f} MB, but kept {MIN_JUMPS} jumpscares safe.")
+        print(f"[{now()}] Pruning to keep under 500 MB...")
+
+        jumps = sorted(JUMP_DIR.glob("*.wav"), key=lambda f: f.stat().st_mtime)
+        ambs = sorted(AMB_DIR.glob("*.wav"), key=lambda f: f.stat().st_mtime)
+
+        for f in list(jumps) + list(ambs):
+            try:
+                f.unlink()
+                print(f"[{now()}] Pruned {f.name}")
+            except Exception as e:
+                print(f"[ERROR] Could not delete {f}: {e}")
+            total = sum(f.stat().st_size for f in ASSETS_DIR.rglob("*.wav"))
+            if total <= limit:
+                break
 
 # =========================
 # Core pipeline per category
