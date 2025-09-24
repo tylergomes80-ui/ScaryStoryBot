@@ -27,6 +27,7 @@ AMB_DIR   = ASSETS / "ambience"
 CACHE_DIR = BASE_DIR / "cache_sounds"
 LOG_DIR   = BASE_DIR / "logs"
 INDEX_PATH= BASE_DIR / "sounds_index.json"
+ASSETS_DIR = ASSETS
 
 for d in [JUMP_DIR, AMB_DIR, CACHE_DIR, LOG_DIR]:
     d.mkdir(parents=True, exist_ok=True)
