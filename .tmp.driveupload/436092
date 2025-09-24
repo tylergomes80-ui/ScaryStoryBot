@@ -1,0 +1,26 @@
+# Ignore Python virtual envs
+venv/
+env/
+
+# Ignore cache/temp
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.tmp
+.cache/
+tmp/
+
+# Ignore big assets
+assets/
+backgrounds/
+backups/
+
+# Ignore media files
+*.mp4
+*.wav
+*.webm
+*.zip
+
+# Ignore local configs
+config.json

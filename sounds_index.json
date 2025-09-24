@@ -310,6 +310,14 @@
       "subtype": "generic",
       "duration": 7,
       "path": "C:\\Users\\tyler\\RedditVideoBot\\assets\\jumpscares\\jumpscare_mvcJ8POiQmE.wav"
+    },
+    "e2wnNXIvMU4__jumpscare_e2wnNXIvMU4": {
+      "title": "Horror Sound - Sound Effect (VERY SCARY)",
+      "url": "https://www.youtube.com/watch?v=e2wnNXIvMU4",
+      "cat": "jumpscare",
+      "subtype": "generic",
+      "duration": 10,
+      "path": "C:\\Users\\tyler\\RedditVideoBot\\assets\\jumpscares\\jumpscare_e2wnNXIvMU4.wav"
     }
   }
 }

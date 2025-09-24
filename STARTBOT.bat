@@ -1,90 +1,118 @@
 @echo off
-title Scary Story Bot - SUPREME RUNNER
-color 0A
+setlocal ENABLEDELAYEDEXPANSION
+title Reddit Video Bot - GOD MODE
+color 0c
+
+:: ----------------------------
+:: Check Dependencies
+:: ----------------------------
+echo Checking dependencies...
+
+where python >nul 2>&1
+if errorlevel 1 (
+    color 0e
+    echo [WARN] Python not found in PATH!
+    echo Install Python 3.10+ and add it to PATH.
+    echo https://www.python.org/downloads/
+    pause
+)
+
+where ffmpeg >nul 2>&1
+if errorlevel 1 (
+    color 0e
+    echo [WARN] FFmpeg not found in PATH!
+    echo Install FFmpeg and add /bin to PATH.
+    echo https://ffmpeg.org/download.html
+    pause
+)
+
+where yt-dlp >nul 2>&1
+if errorlevel 1 (
+    color 0e
+    echo [WARN] yt-dlp not found in PATH!
+    echo Install with:  pip install yt-dlp
+    pause
+)
+
+color 0c
+
+:: ----------------------------
+:: Main Menu
+:: ----------------------------
+:mainmenu
 cls
-
-:menu
-echo ============================================================
-echo         ███████╗ ██████╗  █████╗ ██████╗ ██╗   ██╗
-echo         ██╔════╝██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝
-echo         ███████╗██║   ██║███████║██████╔╝ ╚████╔╝ 
-echo         ╚════██║██║   ██║██╔══██║██╔═══╝   ╚██╔╝  
-echo         ███████║╚██████╔╝██║  ██║██║        ██║   
-echo         ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝        ╚═╝   
-echo ============================================================
-echo               SCARY STORY BOT - STARTUP MENU
-echo ============================================================
-echo   [1] Run Bot (main.py)
-echo   [2] Download Background Videos
-echo   [3] Manage Sounds (jumpscares/ambience)
-echo   [4] Show Bot Status
-echo   [5] Open Output Folder
-echo   [U] Push Local Changes to GitHub
-echo   [P] Pull Latest Changes from GitHub
-echo   [X] Exit
-echo ============================================================
-
-set /p choice="Choose an option: "
+echo ============================================
+echo       REDDIT VIDEO BOT - GOD MODE
+echo ============================================
+echo [1] Run Bot (main.py)
+echo [2] Download Background Videos
+echo [3] Download Sounds
+echo [Q] Quit
+echo ============================================
+set /p choice="Enter choice: "
 
 if "%choice%"=="1" goto runbot
-if "%choice%"=="2" goto download
-if "%choice%"=="3" goto sounds
-if "%choice%"=="4" goto status
-if "%choice%"=="5" goto folder
-if /I "%choice%"=="U" goto gitpush
-if /I "%choice%"=="P" goto gitpull
-if /I "%choice%"=="X" exit
+if "%choice%"=="2" goto dlbg
+if "%choice%"=="3" goto dlsounds
+if /i "%choice%"=="q" goto end
 
-goto menu
+echo Invalid choice. Try again.
+pause
+goto mainmenu
 
+:: ----------------------------
+:: Run Bot
+:: ----------------------------
 :runbot
 cls
-echo [INFO] Starting Bot with heartbeat...
-python main.py 2>&1 | powershell -Command ^
-  "$input | ForEach-Object { Write-Host ('['+(Get-Date -Format 'HH:mm:ss')+'] ' + $_) }"
+echo [RUN] Starting main.py...
+python main.py
+if errorlevel 1 (
+    color 0e
+    echo [ERROR] main.py crashed or Python not found.
+)
+echo --------------------------------------------
+echo Bot finished. Returning to menu...
 pause
-goto menu
+goto mainmenu
 
-:download
+:: ----------------------------
+:: Background Downloader
+:: ----------------------------
+:dlbg
 cls
-echo [INFO] Running video downloader...
+echo [RUN] Starting Background Downloader...
 python download_videos.py
+if errorlevel 1 (
+    color 0e
+    echo [ERROR] Background downloader crashed.
+)
+echo --------------------------------------------
+echo Background Downloader finished. Returning...
 pause
-goto menu
+goto mainmenu
 
-:sounds
+:: ----------------------------
+:: Sound Downloader
+:: ----------------------------
+:dlsounds
 cls
-echo [INFO] Opening sounds folder...
-explorer sounds
+echo [RUN] Starting Sound Downloader...
+python download_sounds.py
+if errorlevel 1 (
+    color 0e
+    echo [ERROR] Sound downloader crashed.
+)
+echo --------------------------------------------
+echo Sound Downloader finished. Returning...
 pause
-goto menu
+goto mainmenu
 
-:status
-cls
-echo [INFO] Bot status check...
-tasklist | findstr /I "python"
+:: ----------------------------
+:: Exit
+:: ----------------------------
+:end
+color 07
+echo Exiting GOD MODE... bye!
 pause
-goto menu
-
-:folder
-cls
-echo [INFO] Opening output folder...
-explorer output
-pause
-goto menu
-
-:gitpush
-cls
-echo [GIT] Adding and pushing local changes to GitHub...
-git add .
-git commit -m "Auto commit from START.bat"
-git push -u origin main
-pause
-goto menu
-
-:gitpull
-cls
-echo [GIT] Pulling latest changes from GitHub...
-git pull origin main
-pause
-goto menu
+exit
