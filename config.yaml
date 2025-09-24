@@ -1,0 +1,20 @@
+categories:
+  minecraft:
+    - "minecraft parkour gameplay no commentary"
+  subway:
+    - "subway surfers gameplay no commentary"
+  satisfying:
+    - "asmr slime cutting no talking"
+  food:
+    - "cooking cutting food preparation tiktok background"
+
+duration:
+  minecraft: [30, 600]
+  subway: [30, 600]
+  satisfying: [15, 300]
+  food: [15, 600]
+
+cache_size: 200
+cache_days: 7
+title_blacklist: ["intro","outro","subscribe","compilation","credits"]
+title_whitelist: ["satisfying","asmr","viral","epic"]

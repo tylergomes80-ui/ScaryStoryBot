@@ -1,0 +1,5 @@
+[START] Background fetcher 
+  File "C:\Users\tyler\RedditVideoBot\background_fetcher.py", line 1
+    @echo off
+          ^^^
+SyntaxError: invalid syntax

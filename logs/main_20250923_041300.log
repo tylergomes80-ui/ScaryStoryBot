@@ -1,0 +1,50 @@
+2025-09-23 04:13:00,908 INFO Starting Scary Story Bot
+2025-09-23 04:13:00,908 INFO Using background: bg_5min.mp4
+2025-09-23 04:13:01,922 INFO Story title: Julia's Septennial
+2025-09-23 04:13:01,923 INFO Synthesizing narration...
+2025-09-23 04:13:22,303 INFO Narration length: 207.72s
+2025-09-23 04:13:22,303 INFO Rendering video...
+2025-09-23 04:13:22,415 ERROR Fatal error: module 'PIL.Image' has no attribute 'ANTIALIAS'
+Traceback (most recent call last):
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 128, in <module>
+    main()
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 122, in main
+    render_video(bg, mp3, out_mp4, duration)
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 81, in render_video
+    v = v.resize(width=W)
+        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\fx\resize.py", line 152, in resize
+    newclip = clip.fl_image(fl)
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\VideoClip.py", line 490, in fl_image
+    return self.fl(lambda gf, t: image_func(gf(t)), apply_to)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\Clip.py", line 136, in fl
+    newclip = self.set_make_frame(lambda t: fun(self.get_frame, t))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<decorator-gen-61>", line 2, in set_make_frame
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\decorators.py", line 14, in outplace
+    f(newclip, *a, **k)
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\VideoClip.py", line 644, in set_make_frame
+    self.size = self.get_frame(0).shape[:2][::-1]
+                ^^^^^^^^^^^^^^^^^
+  File "<decorator-gen-11>", line 2, in get_frame
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\decorators.py", line 89, in wrapper
+    return f(*new_a, **new_kw)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\Clip.py", line 93, in get_frame
+    return self.make_frame(t)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\Clip.py", line 136, in <lambda>
+    newclip = self.set_make_frame(lambda t: fun(self.get_frame, t))
+                                            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\VideoClip.py", line 490, in <lambda>
+    return self.fl(lambda gf, t: image_func(gf(t)), apply_to)
+                                 ^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\fx\resize.py", line 150, in <lambda>
+    fl = lambda pic: resizer(pic.astype('uint8'), newsize)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\venv\Lib\site-packages\moviepy\video\fx\resize.py", line 37, in resizer
+    resized_pil = pilim.resize(newsize[::-1], Image.ANTIALIAS)
+                                              ^^^^^^^^^^^^^^^
+AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'

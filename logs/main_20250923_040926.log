@@ -1,0 +1,11 @@
+2025-09-23 04:09:26,412 INFO Starting Scary Story Bot
+2025-09-23 04:09:26,413 ERROR Fatal error: No backgrounds found. Use the updater to fetch backgrounds first.
+Traceback (most recent call last):
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 128, in <module>
+    main()
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 107, in main
+    bg = pick_bg()
+         ^^^^^^^^^
+  File "C:\Users\tyler\RedditVideoBot\main.py", line 36, in pick_bg
+    raise RuntimeError("No backgrounds found. Use the updater to fetch backgrounds first.")
+RuntimeError: No backgrounds found. Use the updater to fetch backgrounds first.

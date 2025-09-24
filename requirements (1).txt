@@ -1,0 +1,9 @@
+requests
+moviepy==1.0.3
+pyttsx3
+gTTS
+pydub
+elevenlabs==0.2.27
+edge-tts
+openai-whisper @ git+https://github.com/openai/whisper.git
+yt-dlp
